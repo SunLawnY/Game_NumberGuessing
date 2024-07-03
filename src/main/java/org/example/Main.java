@@ -9,6 +9,7 @@ public class Main {
         System.out.println("Let see if you can guess the number between 1 to 100!");
 
         GuessNumberGame game = new GuessNumberGame();
+        System.out.println(game.getTarget());
         Scanner scanner = new Scanner(System.in);
         while(!game.isMathchTarget()) {
             game.makeAGuess(scanner);

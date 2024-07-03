@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class GuessNumberGame {
@@ -8,7 +9,7 @@ public class GuessNumberGame {
     private int userGuess;
 
     public GuessNumberGame() {
-        this.target = (int) Math.round(Math.random()*100);
+        this.target = (int) Math.round(Math.random()*99+1);
         this.mathchTarget = false;
         this.userGuess = -1;
     }
@@ -33,15 +34,41 @@ public class GuessNumberGame {
         this.userGuess = userGuess;
     }
 
-    public void makeAGuess(Scanner scanner){
+    public boolean makeAGuess(Scanner scanner){
         System.out.println("Please input a number");
-        setUserGuess(scanner.nextInt());
-        if (getUserGuess() == getTarget()){
+        try {
+            int userInput = scanner.nextInt();
+            checkValue(userInput);
+            return mathchTarget;
+        } catch (InputMismatchException e) {
+            System.out.println("No string allowed, only Integer!");
+            scanner.next();
+            return mathchTarget;
+        }
+    }
+
+    private boolean checkValue(int userInput) {
+        try{
+            if (userInput > 100 || userInput < 0){
+                throw new IndexOutOfBoundsException();
+            }
+            checkResult(userInput);
+            return mathchTarget;
+        } catch (IndexOutOfBoundsException e){
+            System.out.println("Integer must be between 0 - 100");
+            return mathchTarget;
+        }
+    }
+
+    private boolean checkResult(int userInput) {
+        if (userInput == getTarget()){
             setMathchTarget(true);
         } else {
             giveSomeHints();
         }
+        return mathchTarget;
     }
+
 
     private void giveSomeHints() {
         if (getUserGuess() > getTarget()){

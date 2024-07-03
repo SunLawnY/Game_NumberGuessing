@@ -6,14 +6,14 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Welcome to this Mini Project, Guess Number Game!");
-        System.out.println("Let see if you can guess the number between 1 to 100!");
+        System.out.println("Let's see how many rounds you need to guess the number between 1 and 100!");
 
         GuessNumberGame game = new GuessNumberGame();
-        System.out.println(game.getTarget());
         Scanner scanner = new Scanner(System.in);
-        while(!game.isMathchTarget()) {
+
+        while(!game.isMatchTarget()) {
             game.makeAGuess(scanner);
         }
-        System.out.println("Complete!");
+        System.out.println("Nice one! You guessed the right number in " + game.getRound() + " rounds.");
     }
 }

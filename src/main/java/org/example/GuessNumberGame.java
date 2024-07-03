@@ -5,25 +5,38 @@ import java.util.Scanner;
 
 public class GuessNumberGame {
     private int target;
-    private boolean mathchTarget;
+    private boolean matchTarget;
     private int userGuess;
+    private int round;
+    private String lastErrorMessage;
 
     public GuessNumberGame() {
+        //Make sure it is from 1 - 100 not 0 - 100
         this.target = (int) Math.round(Math.random()*99+1);
-        this.mathchTarget = false;
+        this.matchTarget = false;
         this.userGuess = -1;
+        this.round = 0;
+        this.lastErrorMessage = "";
+    }
+
+    public int getRound() {
+        return round;
+    }
+
+    public void incrementRound() {
+        this.round++;
     }
 
     public int getTarget() {
         return target;
     }
 
-    public boolean isMathchTarget() {
-        return mathchTarget;
+    public boolean isMatchTarget() {
+        return matchTarget;
     }
 
-    public void setMathchTarget(boolean mathchTarget) {
-        this.mathchTarget = mathchTarget;
+    public void setMatchTarget(boolean matchTarget) {
+        this.matchTarget = matchTarget;
     }
 
     public int getUserGuess() {
@@ -34,39 +47,39 @@ public class GuessNumberGame {
         this.userGuess = userGuess;
     }
 
-    public boolean makeAGuess(Scanner scanner){
-        System.out.println("Please input a number");
-        try {
-            int userInput = scanner.nextInt();
-            checkValue(userInput);
-            return mathchTarget;
-        } catch (InputMismatchException e) {
-            System.out.println("No string allowed, only Integer!");
-            scanner.next();
-            return mathchTarget;
-        }
+    public String getLastErrorMessage() {
+        return lastErrorMessage;
     }
 
-    private boolean checkValue(int userInput) {
-        try{
-            if (userInput > 100 || userInput < 0){
+    public void setLastErrorMessage(String lastErrorMessage) {
+        this.lastErrorMessage = lastErrorMessage;
+    }
+
+    public void makeAGuess(Scanner scanner){
+        System.out.println("Please input a number between 1 and 100:");
+        incrementRound();
+        try {
+            setUserGuess(scanner.nextInt());
+            if (userGuess < 0 || userGuess > 100){
                 throw new IndexOutOfBoundsException();
             }
-            checkResult(userInput);
-            return mathchTarget;
+            checkResult(userGuess);
+        } catch (InputMismatchException e) {
+            lastErrorMessage = "Only integers are allowed.";
+            System.out.println(lastErrorMessage);
+            scanner.next();
         } catch (IndexOutOfBoundsException e){
-            System.out.println("Integer must be between 0 - 100");
-            return mathchTarget;
+            lastErrorMessage = "Number must be between 1 and 100!";
+            System.out.println(lastErrorMessage);
         }
     }
 
-    private boolean checkResult(int userInput) {
+    private void checkResult(int userInput) {
         if (userInput == getTarget()){
-            setMathchTarget(true);
+            setMatchTarget(true);
         } else {
             giveSomeHints();
         }
-        return mathchTarget;
     }
 
 
@@ -77,5 +90,4 @@ public class GuessNumberGame {
             System.out.println("Guess higher!");
         }
     }
-
 }

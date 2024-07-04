@@ -8,7 +8,7 @@ public class Main {
         System.out.println("Welcome to this Mini Project, Guess Number Game!");
         System.out.println("Let's see how many rounds you need to guess the number between 1 and 100!");
 
-        GuessNumberGame game = new GuessNumberGame();
+        GuessNumberGameV2 game = new GuessNumberGameV2();
         Scanner scanner = new Scanner(System.in);
 
         while(!game.isMatchTarget()) {

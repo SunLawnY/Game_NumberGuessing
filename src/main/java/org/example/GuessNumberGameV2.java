@@ -23,32 +23,12 @@ public class GuessNumberGameV2 {
         this.lowerBound = 1;
     }
 
-    public int getUpperBound() {
-        return upperBound;
-    }
-
-    public void setUpperBound(int upperBound) {
-        this.upperBound = upperBound;
-    }
-
-    public int getLowerBound() {
-        return lowerBound;
-    }
-
-    public void setLowerBound(int lowerBound) {
-        this.lowerBound = lowerBound;
-    }
-
-    public int getRound() {
-        return round;
-    }
-
-    public void incrementRound() {
-        this.round++;
-    }
-
     public int getTarget() {
         return target;
+    }
+
+    public void setTarget(int target) {
+        this.target = target;
     }
 
     public boolean isMatchTarget() {
@@ -67,12 +47,36 @@ public class GuessNumberGameV2 {
         this.userGuess = userGuess;
     }
 
+    public int getRound() {
+        return round;
+    }
+
+    public void incrementRound() {
+        this.round++;
+    }
+
     public String getLastErrorMessage() {
         return lastErrorMessage;
     }
 
     public void setLastErrorMessage(String lastErrorMessage) {
         this.lastErrorMessage = lastErrorMessage;
+    }
+
+    public int getUpperBound() {
+        return upperBound;
+    }
+
+    public void setUpperBound(int upperBound) {
+        this.upperBound = upperBound;
+    }
+
+    public int getLowerBound() {
+        return lowerBound;
+    }
+
+    public void setLowerBound(int lowerBound) {
+        this.lowerBound = lowerBound;
     }
 
     public void makeAGuess(Scanner scanner){

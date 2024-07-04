@@ -31,6 +31,10 @@ public class GuessNumberGame {
         return target;
     }
 
+    public void setTarget(int target) {
+        this.target = target;
+    }
+
     public boolean isMatchTarget() {
         return matchTarget;
     }
